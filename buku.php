@@ -13,4 +13,8 @@ class Buku {
     function show($table) {
         return $this->db->select($table);
     }
+
+    function tambahData($data){
+        $this->db->insert('buku', $data);
+    }
 }

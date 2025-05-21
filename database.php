@@ -23,6 +23,27 @@ class Database {
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    function insert($table, $rows){
+        $sql = "INSERT INTO $table";
+        $row = null;
+        $value = null;
+
+        foreach($rows as $key => $nilai){
+            $row .= ",".$key;
+            $value .= ",'".$nilai."'";
+        }
+
+        $sql .= "(". substr($row, 1).")";
+        $sql .= "VALUES (". substr($value, 1). ")";
+
+        $query = $this->mysqli->prepare($sql);
+        $query->execute() or die($this->mysqli->error);
+
+        if($query){
+            echo "<script>alert('Data Berhasil Disimpan!');</script>";
+        }
+    }
+
     function __destruct()
     {
         $this->mysqli->close();

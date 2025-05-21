@@ -17,6 +17,47 @@ $table = 'buku';
 
 </head>
 <body>
+            <form action="" method="POST" class="form-buku">
+            <div class="form-group">
+                <label for="judul">Judul Buku:</label>
+                <input type="text" id="judul" name="judul" required>
+            </div>
+
+            <div class="form-group">
+                <label for="penulis">Penulis Buku:</label>
+                <input type="text" id="penulis" name="penulis" required>
+            </div>
+
+            <div class="form-group">
+                <label for="penerbit">Penerbit:</label>
+                <input type="text" id="penerbit" name="penerbit" required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="reset" class="btn-delete">Reset</button>
+                <button type="submit" class="btn">Submit</button>
+            </div>
+        </form>
+
+        <?php 
+            if(isset($_POST['submit'])){
+                $judul = $_POST['judul'];
+                $penulis = $_POST['penulis'];
+                $penerbit = $_POST['penerbit'];
+
+                $data = [
+                    'judul' => $judul,
+                    'penulis' => $penulis,
+                    'penerbit' => $penerbit,
+                ];
+
+                $buku->tambahData($table, $data);
+                echo "<script>alert('Data Berhasil Di Simpan');</script>";
+
+                header("Location: index.php");
+            }
+        ?>
+
     <h1>Tabel Buku</h1>
         <table border="1">
             <thead>
@@ -24,6 +65,7 @@ $table = 'buku';
                 <th>Judul Buku</th>
                 <th>Penulis</th>
                 <th>Penerbit</th>
+                <th>Aksi</th>
             </thead>
             <tbody>
                 <?php
@@ -35,11 +77,17 @@ $table = 'buku';
                         echo '<td>'.$data['judul'].'</td>';
                         echo '<td>'.$data['penulis'].'</td>';
                         echo '<td>'.$data['penerbit'].'</td>';
+                       echo '<td>
+                            <a href="update.php?judul='.$data['judul'].'">Edit</a> |
+                            <a href="delete.php?action=hapus&judul='.$data['judul'].'" onclick="return confirm(\'Yakin hapus data?\')">Hapus</a>
+                        </td>';
                         echo '</tr>';
                     }
                 ?>
 
             </tbody>
         </table>
+
+    
 </body>
 </html>
