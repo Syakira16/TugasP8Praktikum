@@ -7,7 +7,7 @@ class Buku {
 
     function __construct()
     {
-        $this->db = new Database();
+        $this->db = new database();
     }
 
     function show($table) {
@@ -16,5 +16,13 @@ class Buku {
 
     function tambahData($data){
         $this->db->insert('buku', $data);
+    }
+
+    function ubahData($table, $field, $where){
+        $this->db->update('buku', $data, $id);
+    }
+
+    function hapusData($table, $where){
+        $this->db->delete('buku', $id);
     }
 }

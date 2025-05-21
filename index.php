@@ -18,25 +18,27 @@ $table = 'buku';
 </head>
 <body>
             <form action="" method="POST" class="form-buku">
-            <div class="form-group">
-                <label for="judul">Judul Buku:</label>
-                <input type="text" id="judul" name="judul" required>
-            </div>
-
-            <div class="form-group">
-                <label for="penulis">Penulis Buku:</label>
-                <input type="text" id="penulis" name="penulis" required>
-            </div>
-
-            <div class="form-group">
-                <label for="penerbit">Penerbit:</label>
-                <input type="text" id="penerbit" name="penerbit" required>
-            </div>
-
-            <div class="form-buttons">
-                <button type="reset" class="btn-delete">Reset</button>
-                <button type="submit" class="btn">Submit</button>
-            </div>
+            <tr>
+                <td>Judul</td>
+                <td>:</td>
+                <td><input type="text" id="judul" name="judul" required></td>
+            </tr>
+            <tr>
+                <td>Penulis</td>
+                <td>:</td>
+                <td><input type="text" id="penulis" name="penulis" required></td>
+            </tr>
+            <tr>
+                <td>Penerbit</td>
+                <td>:</td>
+                <td><input type="text" id="penerbit" name="penerbit" required></td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="reset" class="btn-delete">Reset</button>
+                     <button type="submit" name="submit" class="btn">Submit</button>
+                </td>
+            </tr>     
         </form>
 
         <?php 
@@ -51,7 +53,7 @@ $table = 'buku';
                     'penerbit' => $penerbit,
                 ];
 
-                $buku->tambahData($table, $data);
+                $buku->tambahData($data);
                 echo "<script>alert('Data Berhasil Di Simpan');</script>";
 
                 header("Location: index.php");
@@ -77,10 +79,10 @@ $table = 'buku';
                         echo '<td>'.$data['judul'].'</td>';
                         echo '<td>'.$data['penulis'].'</td>';
                         echo '<td>'.$data['penerbit'].'</td>';
-                       echo '<td>
-                            <a href="update.php?judul='.$data['judul'].'">Edit</a> |
-                            <a href="delete.php?action=hapus&judul='.$data['judul'].'" onclick="return confirm(\'Yakin hapus data?\')">Hapus</a>
-                        </td>';
+                        echo '<td>
+                                <a href="update.php?id_buku='.$data['id_buku'].'">Edit</a> |
+                                <a href="delete.php?action=hapus&id_buku='.$data['id_buku'].'" onclick="return confirm(\'Yakin hapus data?\')">Hapus</a>
+                            </td>';
                         echo '</tr>';
                     }
                 ?>

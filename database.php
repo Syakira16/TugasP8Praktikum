@@ -34,13 +34,51 @@ class Database {
         }
 
         $sql .= "(". substr($row, 1).")";
-        $sql .= "VALUES (". substr($value, 1). ")";
+        $sql .= " VALUES (". substr($value, 1) .")";
 
         $query = $this->mysqli->prepare($sql);
         $query->execute() or die($this->mysqli->error);
 
         if($query){
             echo "<script>alert('Data Berhasil Disimpan!');</script>";
+        }
+    }
+
+    function update($table, $field, $where){
+        $sql = "UPDATE $table SET";
+        $set = null;
+        $setWhere = null;
+
+        foreach($field as $key => $value){
+            $set .= ",".$key. "='" .$value ."'";
+        }
+
+        foreach($where as $key => $value){
+            $setWhere = $key. "='" .$value ."'";
+        }
+
+        $sql .= substr($set, 1). "WHERE $setWhere";
+        $query = $this->mysqli->prepare($sql);
+        $query->execute() or die($this->mysqli->error);
+
+        if($query){
+            echo "<script>alert('Data Berhasil Disimpan!');</script>";
+        }
+    }
+
+    function delete($table, $where) {
+        $setWhere = null;
+
+        foreach($where as $key => $value){
+            $setWhere = $key. "='" .$value ."'";
+        }
+
+            $sql = "DELETE FROM $table WHERE $setWhere";
+            $query = $this->mysqli->prepare($sql) or die($this->mysqli->error);
+            $query->execute();
+
+        if($query){
+            echo "<script>alert('Data Berhasil Dihapus!');</script>";
         }
     }
 
