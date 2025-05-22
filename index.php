@@ -17,29 +17,33 @@ $table = 'buku';
 
 </head>
 <body>
-            <form action="" method="POST" class="form-buku">
-            <tr>
-                <td>Judul</td>
-                <td>:</td>
-                <td><input type="text" id="judul" name="judul" required></td>
-            </tr>
-            <tr>
-                <td>Penulis</td>
-                <td>:</td>
-                <td><input type="text" id="penulis" name="penulis" required></td>
-            </tr>
-            <tr>
-                <td>Penerbit</td>
-                <td>:</td>
-                <td><input type="text" id="penerbit" name="penerbit" required></td>
-            </tr>
-            <tr>
-                <td>
+    <h1>Tambah Data Buku</h1>
+        <div class="form-wrapper">
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="judul">Judul:</label>
+                    <input type="text" id="judul" name="judul" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="penulis">Penulis:</label>
+                    <input type="text" id="penulis" name="penulis" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="penerbit">Penerbit:</label>
+                    <input type="text" id="penerbit" name="penerbit" required>
+                </div>
+
+                <div class="form-buttons">
                     <button type="reset" class="btn-delete">Reset</button>
-                     <button type="submit" name="submit" class="btn">Submit</button>
-                </td>
-            </tr>     
-        </form>
+                    <button type="submit" name="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+
+
+
 
         <?php 
             if(isset($_POST['submit'])){
@@ -59,7 +63,7 @@ $table = 'buku';
                 header("Location: index.php");
             }
         ?>
-
+    <br><br>
     <h1>Tabel Buku</h1>
         <table border="1">
             <thead>
@@ -88,8 +92,6 @@ $table = 'buku';
                 ?>
 
             </tbody>
-        </table>
-
-    
+        </table>    
 </body>
 </html>

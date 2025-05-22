@@ -45,40 +45,28 @@ class Database {
     }
 
     function update($table, $field, $where){
-        $sql = "UPDATE $table SET";
         $set = null;
         $setWhere = null;
 
-        foreach($field as $key => $value){
-            $set .= ",".$key. "='" .$value ."'";
+        foreach ($field as $key => $value) {
+            $set .= "," .$key. " = '" .$value. "' ";
         }
-
-        foreach($where as $key => $value){
-            $setWhere = $key. "='" .$value ."'";
+        foreach ($where as $key => $value) {
+            $setWhere .= $key. " = " .$value;
         }
-
-        $sql .= substr($set, 1). "WHERE $setWhere";
-        $query = $this->mysqli->prepare($sql);
-        $query->execute() or die($this->mysqli->error);
-
-        if($query){
-            echo "<script>alert('Data Berhasil Disimpan!');</script>";
-        }
+        $sql = "UPDATE $table SET " . substr($set, 1) . " WHERE $setWhere";
+        echo $sql;
+        $query = $this->mysqli->prepare($sql) or die($this->mysqli->error);
+        $query->execute();
     }
 
-    function delete($table, $where) {
-        $setWhere = null;
+    function delete($table) {
+        if(isset($_GET['id_buku'])){
+            $id = $_GET['id_buku'];
 
-        foreach($where as $key => $value){
-            $setWhere = $key. "='" .$value ."'";
-        }
-
-            $sql = "DELETE FROM $table WHERE $setWhere";
+            $sql = "DELETE FROM $table WHERE id_buku=$id";
             $query = $this->mysqli->prepare($sql) or die($this->mysqli->error);
             $query->execute();
-
-        if($query){
-            echo "<script>alert('Data Berhasil Dihapus!');</script>";
         }
     }
 

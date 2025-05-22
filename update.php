@@ -1,8 +1,7 @@
 <?php 
-
 require_once 'Buku.php';
 
-if(!isset($_GET['id_buku'])){
+if (!isset($_GET['id_buku'])) {
     header('location: index.php');
     exit;
 }
@@ -10,9 +9,20 @@ if(!isset($_GET['id_buku'])){
 $buku = new Buku();
 $table = 'buku';
 $id = $_GET['id_buku'];
-// $where = ['id_buku' => $id];
 $data = $buku->show($table);
+$selected = null;
 
+foreach ($data as $d) {
+    if ($d['id_buku'] == $id) {
+        $selected = $d;
+        break;
+    }
+}
+
+if (!$selected) {
+    echo "Data tidak ditemukan.";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,58 +33,54 @@ $data = $buku->show($table);
     <title>Update Buku</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <h1>Update Data Buku</h1>
 
-    <form action="" method="POST">
-    
-             <input type="hidden" name="id" value="<?= $selected['id_buku']; ?>">
-            <label>Judul Buku :</label><br>
-            <input type="text" name="judul" value="<?= $selected['judul']; ?>" required><br>
-            <label>Penulis :</label><br>
-            <input type="text" name="penulis" value="<?= $selected['penulis']; ?>" required><br>
-            <label>Penerbit :</label><br>
-            <input type="text" name="penerbit" value="<?= $selected['penerbit']; ?>" required><br><br>
-            <button type="submit" name="submit">Update</button>
+    <div class="form-wrapper">
+        <a href="index.php" class="back-button">← Kembali</a>
 
-                <label for="judul">Judul</label>
-                <input type="text" name="judul" value="<?=row[0]['judul'];?>"></td>
-            
-                <label for="penulis">Penulis</label>
-                <input type="text" name="penulis" value="<?=row[0]['penulis'];?>"></td>
+        <form action="" method="POST">
+            <input type="hidden" name="id_buku" value="<?= $selected['id_buku']; ?>">
 
-                 <label for="penerbit">Penerbit</label>
-                <input type="text" name="penerbit" value="<?=row[0]['penerbit'];?>"></td>
-        
-                <input type="submit" name="submit" value="SUBMIT">
-                <input type="back" name="back" value="BACK">
-         
-    </form>
-    
+            <div class="form-group">
+                <label for="judul">Judul:</label>
+                <input type="text" name="judul" id="judul" value="<?= $selected['judul']; ?>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="penulis">Penulis:</label>
+                <input type="text" name="penulis" id="penulis" value="<?= $selected['penulis']; ?>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="penerbit">Penerbit:</label>
+                <input type="text" name="penerbit" id="penerbit" value="<?= $selected['penerbit']; ?>" required>
+            </div>
+
+            <div class="form-buttons">
+                <button type="submit" name="submit" class="btn">Ubah Buku</button>
+            </div>
+        </form>
+    </div>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $judul = $_POST['judul'];
+        $penulis = $_POST['penulis'];
+        $penerbit = $_POST['penerbit'];
+
+        $data = [
+            'judul' => $judul,
+            'penulis' => $penulis,
+            'penerbit' => $penerbit
+        ];
+
+        $where = ['id_buku' => $id];
+        $buku->ubahData($data, $where);
+
+        echo "<script>alert('Data Berhasil Diupdate'); window.location.href='index.php';</script>";
+    }
+    ?>
 </body>
 </html>
-
-<?php
-if(isset($_POST['back'])){
-    header("location: index.php");
-}
-
-if (isset($_POST['submit'])) {
-            $judul = $_POST['judul'];
-            $penulis = $_POST['penulis'];
-            $penerbit = $_POST['penerbit'];
-
-            $data = [
-                'judul' => $judul,
-                'penulis' => $penulis,
-                'penerbit' => $penerbit
-            ];
-
-            $where = ['id_buku' => $id];
-            $buku->ubahData($data, $where);
-            echo "<script>alert('Data Berhasil Diupdate');</script>";    
-        }
-
-?>

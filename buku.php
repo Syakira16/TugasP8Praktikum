@@ -18,11 +18,11 @@ class Buku {
         $this->db->insert('buku', $data);
     }
 
-    function ubahData($table, $field, $where){
-        $this->db->update('buku', $data, $id);
+    public function ubahData($data, $id) {
+        return $this->db->update('buku', $data, $id);
     }
 
-    function hapusData($table, $where){
-        $this->db->delete('buku', $id);
+    function hapusData($where){
+        $this->db->delete('buku');
     }
 }
