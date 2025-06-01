@@ -3,25 +3,19 @@
 require_once 'session.php';
 require_once '../database.php';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: loginForm.php');
+    exit;
+}
 
-class Login {
-    private $db;     // simpan objek Database agar tetap hidup
-    private $conn;   // koneksi mysqli
+$username = trim($_POST['username'] ?? '');
+$password = $_POST['password'] ?? '';
 
-    public function __construct() {
-        $this->db = new Database();
-        $this->conn = $this->db->mysqli;
-    }
-
-    public function check_login() {
-        $username = trim($_POST['username'] ?? '');
-        $password = $_POST['password'] ?? '';
-
-        if (empty($username) || empty($password)) {
-            $_SESSION['login_error'] = 'Username dan password tidak boleh kosong.';
-            header('Location: formlogin.php');
-            exit;
-        }
+if ($username === '' || $password === '') {
+    $_SESSION['login_error'] = 'Username dan password tidak boleh kosong.';
+    header('Location: formlogin.php');
+    exit;
+}
 
         $db = new Database;
         $stmt = $db->mysqli->prepare("SELECT id, email, username, password, level FROM user_perpus WHERE username = ?");
@@ -67,6 +61,4 @@ class Login {
         // jika sampai sini berarti gagal, kembali ke form
         header('Location: formlogin.php');
         exit;
-    }
-}
 

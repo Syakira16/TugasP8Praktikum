@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once '../auth/session.php';
 
 if(!isset($_SESSION['id'])) {
@@ -9,7 +9,7 @@ if(!isset($_SESSION['id'])) {
 $role = $_SESSION['level'];
 $username = $_SESSION['user_perpus']['email'];
 
-require_once '../database.php';
+require_once '../database.php'; 
 
 $db = new Database();
 $result = $db->mysqli->query("SELECT * FROM Buku");
@@ -17,8 +17,8 @@ $result = $db->mysqli->query("SELECT * FROM Buku");
 $datas = [];
 if($result) {
     $datas = $result->fetch_all(MYSQLI_ASSOC);
-}
-?>
+} 
+?> 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,6 @@ if($result) {
      <nav>
         <h2>Wattpad</h2>
         <div style="float: right;" class="nav-buttons">
-            <span style="margin-top: 5px;">Halo, <?= $_SESSION['username']; ?></span>
             <a href="auth/logout.php" onclick="return confirm('Yakin ingin logout?')">
                 <button type="button">Logout</button>
             </a>
@@ -41,7 +40,7 @@ if($result) {
     </nav>
 
     <section class="content">
-->
+
     <h1>Daftar Buku</h1>
     <table border="1">
         <thead>

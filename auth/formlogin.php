@@ -21,7 +21,7 @@ unset($_SESSION['login_error']);
                 <input type="password" name="password" placeholder="Enter password" required>
 
                 <?php if (!empty($error)): ?>
-                                <div class="error"><?= $error ?></div>
+                    <div class="error"><?= $error ?></div>
                 <?php endif; ?>
 
                 <button type="submit">Login</button>

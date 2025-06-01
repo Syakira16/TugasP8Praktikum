@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <input type="email" name="email" placeholder="Enter email" required>
                 <input type="text" name="username" placeholder="Enter username" required>
                 <input type="password" name="password" placeholder="Enter password" required>
-                <button type="submit">Register</button>
+                <button type="submit" name="register" value="register">Register</button>
             </form>
             <p>Already have an account? <a href="formlogin.php">Sign in</a></p>
         </div>
