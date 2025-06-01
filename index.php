@@ -4,6 +4,18 @@ require_once 'Buku.php';
 
 $buku = new Buku();
 $table = 'buku';
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit;
+}
+
+if ($_SESSION['level'] !== 0) {
+    echo "Akses ditolak";
+    exit;
+}
+?>
+
 ?>
 
 <!DOCTYPE html>

@@ -6,6 +6,7 @@ body {
     color: #333;
 }
 
+
 h1 {
     text-align: center;
     color: #2c3e50;
@@ -107,7 +108,78 @@ td:first-child {
     width: 50px;
 }
 
+/* === Tambahan styling untuk halaman login & register === */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 
+.auth-wrapper {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.auth-wrapper h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 26px;
+    color: #2c3e50;
+}
+
+.auth-wrapper input[type="text"],
+.auth-wrapper input[type="email"],
+.auth-wrapper input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.2s;
+}
+
+.auth-wrapper input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.auth-wrapper button {
+    width: 100%;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.auth-wrapper button:hover {
+    background-color: #2980b9;
+}
+
+.auth-wrapper p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.auth-wrapper a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.auth-wrapper a:hover {
+    text-decoration: underline;
+}
 
 
 @media screen and (max-width: 768px) {
