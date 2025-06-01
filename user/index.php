@@ -41,7 +41,7 @@ if($result) {
     </nav>
 
     <section class="content">
-    <?php if ($role === 0): ?>
+->
     <h1>Daftar Buku</h1>
     <table border="1">
         <thead>
